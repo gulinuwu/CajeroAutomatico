@@ -1,0 +1,115 @@
+           /*"Escribe un programa que simule un cajero automático. 
+           * El programa debe solicitar al usuario que ingrese su saldo inicial y luego permitirle elegir entre las opciones de retiro o depósito. 
+           * Si elige retirar dinero, el programa debe solicitar la cantidad a retirar y mostrar el saldo actualizado. 
+           * Si elige depositar dinero, el programa debe solicitar la cantidad a depositar y mostrar el saldo actualizado. 
+           * El programa debe permitir al usuario realizar estas operaciones de manera repetida hasta que decida salir."*/
+public void CajeroAutomatico()
+{
+    Console.WriteLine("Cajero Automático");
+    Console.WriteLine("-----------------");
+    Console.WriteLine();
+
+    Console.Write("Introduce tu saldo inicial: ");
+    double saldoInicial = 0;
+    int respuesta = 0;
+    bool salir = true;
+    string entrada = "";
+    bool saldoValido = false;
+
+    do
+    {
+        entrada = Console.ReadLine();
+
+        if(double.TryParse(entrada, out double numero) && numero >= 0)
+        {
+            saldoInicial = numero;
+            saldoValido = true;
+        }
+        else
+        {
+            Console.Write("Introduce un valor válido (decimal separado por Coma) o mayor a 0: ");
+        }
+    } while (!saldoValido);
+    
+    do
+    {
+        Console.WriteLine("¿Qué opción deseas hacer?");
+        Console.Write("1. Retirar      2. Depositar        3. Salir:  ");
+        respuesta = Convert.ToInt32(Console.ReadLine());
+        do
+        {
+            if (respuesta == 1)
+            {
+                Console.WriteLine("Has elegido Retirar saldo de la cuenta.");
+                Console.WriteLine();
+                saldoInicial = Retirar(saldoInicial);
+            }
+            if (respuesta == 2)
+            {
+                Console.WriteLine("Has elegido Retirar saldo de la cuenta.");
+                Console.WriteLine();
+                saldoInicial = Depositar(saldoInicial);
+            }
+            if (respuesta == 3)
+            {
+                Console.WriteLine("Has elegido Salir.");
+                Console.WriteLine("Introduce una tecla para salir.");
+                salir = false;
+            }
+        } while (respuesta != 1 && respuesta != 2 && respuesta != 3);
+    } while (salir == true);
+    Console.ReadKey();
+
+    double Retirar(double saldoInicial)
+    {
+        double retirar = 0;
+        string entrada = "";
+        try
+        {
+            Console.WriteLine("¿Cuanto dinero quieres retirar de la cuenta?");
+            do
+            {
+                entrada = Console.ReadLine();
+                
+                if (double.TryParse(entrada, out retirar) && retirar > 0)
+                {
+                    saldoValido = true;
+                }
+                else
+                {
+                    Console.Write("Introduce un valor válido (decimal separado por Coma) o mayor a 0: ");
+                }
+            } while (!saldoValido);
+        }
+        catch (Exception ex) { Console.WriteLine($"{ex.Message}"); }
+
+        saldoInicial -= retirar;
+        Console.WriteLine("El saldo actual es " + saldoInicial.ToString("F2"));
+        return saldoInicial;
+    }
+    double Depositar(double saldoInicial)
+    {
+        double deposito = 0;
+        try
+        {
+            Console.WriteLine("¿Cuanto dinero quieres depositar de la cuenta?");
+            do
+            {
+                deposito = Convert.ToDouble(Console.ReadLine());
+                if (double.TryParse(entrada, out deposito) && deposito > 0)
+                {
+                    saldoValido = true;
+                }
+                else
+                {
+                    Console.Write("Introduce un valor válido (decimal separado por Coma) o mayor a 0: ");
+                }
+            } while (!saldoValido);
+        }
+        catch (Exception ex) { Console.WriteLine($"{ex.Message}"); }
+
+        saldoInicial += deposito;
+        Console.WriteLine("El saldo actual es " + saldoInicial.ToString("F2"));
+        return saldoInicial;
+    }
+}
