@@ -1,4 +1,4 @@
-           /*"Escribe un programa que simule un cajero automático. 
+           /*"Escribe un programa que simule un cajero automático.
            * El programa debe solicitar al usuario que ingrese su saldo inicial y luego permitirle elegir entre las opciones de retiro o depósito. 
            * Si elige retirar dinero, el programa debe solicitar la cantidad a retirar y mostrar el saldo actualizado. 
            * Si elige depositar dinero, el programa debe solicitar la cantidad a depositar y mostrar el saldo actualizado. 
